@@ -39,9 +39,8 @@ var app={
       bola.body.collideWorldBounds = true;
       bola.body.onWorldBounds = new Phaser.Signal();
       bola.body.onWorldBounds.add(app.decrementaPuntuacion, this);
-      bola.body.onWorldBounds.add( () => game.stage.backgroundColor="#ffa500",this);
+      
     }
-
 
     function update(){
       var factorDificultad = (300 + (dificultad * 100));
@@ -53,6 +52,12 @@ var app={
 
       game.physics.arcade.overlap(bola, objetivo, () => game.stage.backgroundColor-=1, null, this);
       game.physics.arcade.overlap(bola, objetivo2, () => game.stage.backgroundColor+=1, null, this);
+
+      if(bola.body.checkWorldBounds()){
+        game.stage.backgroundColor = "#ff0000";
+      } else {
+        game.stage.backgroundColor = "#ffa500";
+      }
 
     }
 
