@@ -22,10 +22,6 @@ var app={
       game.load.image('bola', 'assets/bola.png');
       game.load.image('objetivo', 'assets/objetivo.png');
       game.load.image('objetivo2', 'assets/objetivo2.png');
-
-      game.load.image('linea_horizontal','assets/linea_horizontal.png');
-      game.load.image('linea_vertical','assets/linea_vertical.png');
-      game.load.image('exterior','assets/exterior.png');
     }
 
     function create() {
