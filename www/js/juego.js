@@ -1,6 +1,6 @@
 var app={
   inicio: function(){
-    DIAMETRO_BOLA = 50;
+    DIAMETRO_BOLA = 15;
     dificultad = 0;
     velocidadX = 0;
     velocidadY = 0;
@@ -15,30 +15,29 @@ var app={
 
   iniciaJuego: function(){
 
+    var maze;
+
     function preload() {
       game.physics.startSystem(Phaser.Physics.ARCADE);
 
       game.stage.backgroundColor = '#f27d0c';
-      game.load.image('bola', 'assets/bola.png');
-      game.load.image('objetivo', 'assets/objetivo.png');
-      game.load.image('objetivo2', 'assets/objetivo2.png');
-
-      game.load.image('linea_horizontal','assets/linea_horizontal.png');
-      game.load.image('linea_vertical','assets/linea_vertical.png');
-      game.load.image('exterior','assets/exterior.png');
+      game.load.image('bola', 'assets/mini_bola.png');
+      game.load.image('maze','assets/maze.png');
     }
 
     function create() {
-      scoreText = game.add.text(16, 16, puntuacion, { fontSize: '100px', fill: '#757676' });
-      
-      objetivo = game.add.sprite(app.inicioX(), app.inicioY(), 'objetivo');
-      objetivo2 = game.add.sprite(app.inicioX(), app.inicioY(), 'objetivo2');
+      //scoreText = game.add.text(16, 16, puntuacion, { fontSize: '100px', fill: '#757676' });
+
+      maze = game.add.sprite(game.world.centerX, game.world.centerY,'maze');
+      maze.anchor.set(0.5);
+      maze.inputEnabled = true;
+      maze.input.pixelPerfectOver = true;
+      maze.input.useHandCursor = true;
 
       bola = game.add.sprite(app.inicioX(), app.inicioY(), 'bola');
       
       game.physics.arcade.enable(bola);
-      game.physics.arcade.enable(objetivo);
-      game.physics.arcade.enable(objetivo2);
+      game.physics.arcade.enable(maze);
 
       bola.body.collideWorldBounds = true;
       bola.body.onWorldBounds = new Phaser.Signal();
@@ -46,17 +45,23 @@ var app={
       bola.body.onWorldBounds.add( () => game.stage.backgroundColor="#ffa500",this);
     }
 
-
     function update(){
       var factorDificultad = (300 + (dificultad * 100));
       bola.body.velocity.y = (velocidadY * factorDificultad);
       bola.body.velocity.x = (velocidadX * (-1 * factorDificultad));
       
+      /*
       game.physics.arcade.overlap(bola, objetivo, app.incrementaPuntuacion, null, this);
       game.physics.arcade.overlap(bola, objetivo2, app.incrementaPuntuacionObjetivo2, null, this);
 
       game.physics.arcade.overlap(bola, objetivo, () => game.stage.backgroundColor-=1, null, this);
       game.physics.arcade.overlap(bola, objetivo2, () => game.stage.backgroundColor+=1, null, this);
+      */
+
+      game.physics.arcade.overlap(bola,maze, () => {
+        bola.body.velocity.x = 0;
+        bola.body.velocity.y = 0;
+      }, null, this);
 
     }
 
@@ -66,12 +71,12 @@ var app={
 
   decrementaPuntuacion: function(){
     puntuacion = puntuacion-1;
-    scoreText.text = puntuacion;
+    //scoreText.text = puntuacion;
   },
 
   incrementaPuntuacion: function(){
     puntuacion = puntuacion+1;
-    scoreText.text = puntuacion;
+    //scoreText.text = puntuacion;
 
     objetivo.body.x = app.inicioX();
     objetivo.body.y = app.inicioY();
@@ -83,7 +88,7 @@ var app={
 
   incrementaPuntuacionObjetivo2: function(){
     puntuacion = puntuacion+10;
-    scoreText.text = puntuacion;
+    //scoreText.text = puntuacion;
 
     objetivo2.body.x = app.inicioX()
     objetivo2.body.y = app.inicioY();

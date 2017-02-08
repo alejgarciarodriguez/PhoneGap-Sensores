@@ -61,3 +61,9 @@ function display(m) {
 	}
 	return text.join('');
 }
+
+var maze = maze(5,5);
+
+console.log(maze);
+
+console.log(display(maze));
