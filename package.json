@@ -1,0 +1,17 @@
+{
+  "name": "MOOC-game",
+  "version": "1.1.0",
+  "description": "Juego demostracion de las capacidades del acelerometro",
+  "repository": {
+    "type": "git",
+    "url": "git+https:////github.com/devscola/MOOC-game.git"
+  },
+  "keywords": [
+    "ecosystem:phonegap",
+    "ecosystem:cordova",
+    "cordova:template",
+    "phonegap:template"
+  ],
+  "author": "Devscola",
+  "license": "Apache-2.0"
+}
