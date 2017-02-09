@@ -60,6 +60,8 @@ var app={
       //mini_bola.body.velocity.y = (velocidadY * factorDificultad);
       //mini_bola.body.velocity.x = (velocidadX * (-1 * factorDificultad));
 
+      maze.body.rotateLeft(2);
+
       if(cursors.up.isDown){
         mini_bola.body.y--;
       } else if(cursors.down.isDown){
