@@ -50,6 +50,7 @@ var app={
       mini_bola.body.collideWorldBounds = true;
 
       mini_bola.body.onWorldBounds = new Phaser.Signal();
+      mini_bola.body.onWorldBounds.add( () => game.add.text(16, 16, puntuacion, {fontSize: '100px', fill: '#757676'}), this);
       
       cursors = game.input.keyboard.createCursorKeys();
     }
