@@ -1,6 +1,6 @@
 var app={
   inicio: function(){
-    DIAMETRO_mini_bola = 15;
+    
     dificultad = 1;
     velocidadX = 0;
     velocidadY = 0;
@@ -38,7 +38,6 @@ var app={
       maze.body.clearShapes();
       maze.body.loadPolygon('physicsData', 'maze');
       
-
       game.physics.p2.defaultRestitution = 0.8;
       
       mini_bola = game.add.sprite(maze.body.x, maze.body.y, 'mini_bola');
@@ -48,10 +47,9 @@ var app={
 
       game.physics.p2.enable(mini_bola);
 
-
       mini_bola.body.collideWorldBounds = true;
+
       mini_bola.body.onWorldBounds = new Phaser.Signal();
-      mini_bola.body.onWorldBounds.add( () => console.log("bounds"), this);
       
       cursors = game.input.keyboard.createCursorKeys();
     }
@@ -60,7 +58,7 @@ var app={
       //var factorDificultad = (300 + (dificultad * 100));
       //mini_bola.body.velocity.y = (velocidadY * factorDificultad);
       //mini_bola.body.velocity.x = (velocidadX * (-1 * factorDificultad));
-      
+
       if(cursors.up.isDown){
         mini_bola.body.y--;
       } else if(cursors.down.isDown){
